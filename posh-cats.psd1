@@ -12,7 +12,7 @@
 RootModule = 'posh-cats.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '0.0.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -23,7 +23,7 @@ GUID = 'd9db3b86-d8df-4a65-a8d3-aab2a8c1952c'
 # Author of this module
 Author = 'kidchenko'
 
-Description = 'Get popular cat names'
+
 
 # Company or vendor of this module
 CompanyName = 'Unknown'
@@ -32,7 +32,7 @@ CompanyName = 'Unknown'
 Copyright = 'MIT (c) kidchenko.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'Get popular cat names'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''

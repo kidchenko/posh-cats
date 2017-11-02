@@ -6,7 +6,7 @@
 # This improves performance of command discovery in PowerShell.
 
 function LoadCatNames {
-    Get-Content -Raw -Path ".\cat-names.json" | ConvertFrom-Json
+    Get-Content -Raw -Path "$PSScriptRoot\cat-names.json" | ConvertFrom-Json
 }
 
 function Get-CatName {
