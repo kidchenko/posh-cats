@@ -9,8 +9,49 @@ function LoadCatNames {
     Get-Content -Raw -Path "$PSScriptRoot\cat-names.json" | ConvertFrom-Json
 }
 
+<#
+
+.SYNOPSIS
+
+Get name of cats
+
+#>
+[CmdletBinding]
 function Get-CatName {
-    LoadCatNames | Get-Random
+    Param(
+        [string]$Filter = "*",
+        [switch]$All
+    )
+
+    $allCats = LoadCatNames
+
+    if ($All -eq $true) {
+        return $allCats
+    }
+
+    $allCats | Where-Object { $_ -like $Filter } | Get-Random
+}
+
+function Convert-UnicodeToString {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [string] $UnicodeChars
+    )
+
+    $UnicodeChars = $UnicodeChars -replace 'U\+', '';
+
+    $UnicodeArray = @();
+    foreach ($UnicodeChar in $UnicodeChars.Split(' ')) {
+        $Int = [System.Convert]::ToInt32($UnicodeChar, 16);
+        $UnicodeArray += [System.Char]::ConvertFromUtf32($Int);
+    }
+
+    $UnicodeArray -join [String]::Empty;
+}
+
+function Get-CatEmoji {
+    Convert-UnicodeToString "U+1F63A"
 }
 
 Export-ModuleMember -Function *-*
