@@ -5,9 +5,7 @@
 # Be sure to list each exported functions in the FunctionsToExport field of the module manifest file.
 # This improves performance of command discovery in PowerShell.
 
-function LoadCatNames {
-    Get-Content -Raw -Path "$PSScriptRoot\cat-names.json" | ConvertFrom-Json
-}
+
 
 <#
 
@@ -32,7 +30,12 @@ function Get-CatName {
     $allCats | Where-Object { $_ -like $Filter } | Get-Random
 }
 
-function Convert-UnicodeToString {
+[CmdletBinding]
+function Get-CatEmoji {
+    ConvertUnicodeToString "U+1F63A"
+}
+
+function ConvertUnicodeToString {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -50,8 +53,8 @@ function Convert-UnicodeToString {
     $UnicodeArray -join [String]::Empty;
 }
 
-function Get-CatEmoji {
-    Convert-UnicodeToString "U+1F63A"
+function LoadCatNames {
+    Get-Content -Raw -Path "$PSScriptRoot\cat-names.json" | ConvertFrom-Json
 }
 
 Export-ModuleMember -Function *-*
