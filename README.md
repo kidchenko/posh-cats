@@ -1,4 +1,4 @@
-# 🐱 posh-cats
+# 🐱 posh-cats [![Build status](https://ci.appveyor.com/api/projects/status/gx6o0vblpiwepn5s/branch/master?svg=true)](https://ci.appveyor.com/project/kidchenko/posh-cats/branch/master)
 
 > A cross-platform cats module for powershell.
 
