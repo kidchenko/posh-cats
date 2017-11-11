@@ -62,88 +62,237 @@ function Get-CatName {
 .EXAMPLE
     Get-CatEmoji
 
-    This command get a cat emoji face. 🐱
+    This command return a cat emoji face. 🐱
 #>
 [CmdletBinding]
 function Get-CatEmoji {
     ConvertUnicodeToString -UnicodeChars "U+1F431"
 }
 
-function Get-CatBuzz {
-    Start-Process -FilePath "https://www.buzzfeed.com/expresident/best-cat-pictures"
-}
 
 <#
+
 .SYNOPSIS
-Get a cat image
+    Open the "100 Most Important Cat Pictures Of All Time" page on BuzzFeed.
 
 .DESCRIPTION
-Get a cat image and open in the browser.
+    Open BuzzFeed in the cutiest page about cats. OK, this is it. This is the one. We can all finally shut down the internet and go home after this.
 
 .EXAMPLE
-Get-CatImage
+    Get-CatBuzz
+
+    This command open BuzzFeed in your browser.
+
+#>
+[CmdletBinding]
+function Get-CatBuzz {
+    OpenPage "https://www.buzzfeed.com/expresident/best-cat-pictures"
+}
+
+
+<#
+
+.SYNOPSIS
+    Get a random image of cats.
+
+.DESCRIPTION
+    Open a cat image in your browser.
+
+.EXAMPLE
+    Get-CatImage
+
+    This command open a cat image in your browser.
 
 #>
 [CmdletBinding]
 function Get-CatImage {
-    Start-Process -FilePath "http://thecatapi.com/api/images/get?api_key=MjQyMzQ3"
+    $targetUrl = if ($IsWindows -eq $true)
+    {
+        "https://thecatapi.com/api/images/get?api_key=MjQyMzQ3"
+    }
+    else {
+        "http://thecatapi.com/api/images/get"
+    }
+
+    OpenPage $targetUrl
 }
 
-function Get-CatMeowYoutubeMix {
-    Start-Process -FilePath "https://youtu.be/SbyZDq76T74"
+<#
+
+.SYNOPSIS
+    Open a MeowMix video in youtube.
+
+.DESCRIPTION
+    Open a 10h MeowMix video in youtube.
+
+.EXAMPLE
+    Get-CatMeowMix
+
+    This command open MeowMix in youtube.
+
+#>
+[CmdletBinding]
+function Get-CatMeowMix {
+    OpenPage "https://youtu.be/SbyZDq76T74"
 }
 
 
+<#
+
+.SYNOPSIS
+    Play a meow sound effect.
+
+.DESCRIPTION
+    Pay a wav sound of cat meowing.
+
+.EXAMPLE
+    Get-CatMeow
+
+    This command play a meow effect.
+
+#>
+[CmdletBinding]
 function Get-CatMeow {
-    PlayCatSound "$PSScriptRoot\cat-meow.wav"
+    PlayCatSound "$PSSCriptRoot/cat-meow.wav"
 }
 
+<#
+
+.SYNOPSIS
+    Play a baby cat meow sound effect.
+
+.DESCRIPTION
+    Pay a wav sound of baby cat meowing.
+
+.EXAMPLE
+    Get-CatBabyMeow
+
+    This command play a baby cat meow effect.
+
+#>
+[CmdletBinding]
 function Get-CatBabyMeow {
-    PlayCatSound "$PSScriptRoot\cat-baby-meow.wav"
+    PlayCatSound "$PSSCriptRoot/cat-baby-meow.wav"
 }
 
+<#
+
+.SYNOPSIS
+    Play a sound effect of cats fighting.
+
+.DESCRIPTION
+    Pay a wav sound of cats fighting.
+
+.EXAMPLE
+    Get-CatFight
+
+    This command play cats fighting.
+
+#>
+[CmdletBinding]
 function Get-CatFight {
-    PlayCatSound "$PSScriptRoot\cat-fight.wav"
+    PlayCatSound "$PSSCriptRoot/cat-fight.wav"
 }
 
+
+<#
+
+.SYNOPSIS
+    Play a sound effect of a cat angry.
+
+.DESCRIPTION
+    Pay a wav sound of an angry cat.
+
+.EXAMPLE
+    Get-CatAngry
+
+    This command play a angry cat.
+
+#>
+[CmdletBinding]
 function Get-CatAngry {
-    PlayCatSound "$PSScriptRoot\cat-angry.wav"
+    PlayCatSound "$PSScriptRoot/cat-angry.wav"
 }
 
+
+<#
+
+.SYNOPSIS
+    Play a purr (that sound when the cat want love) sound effect.
+
+.DESCRIPTION
+    Play a purr... purr... purr sound effect.
+
+.EXAMPLE
+    Get-CatPurr
+
+    This command play a purr cat effect.
+
+#>
 function Get-CatPurr {
-    PlayCatSound "$PSScriptRoot\cat-purr.wav"
+    PlayCatSound "$PSSCriptRoot/cat-purr.wav"
 }
 
+
+<#
+
+.SYNOPSIS
+    Play a yowl (when the cat is angry) sound effect.
+
+.DESCRIPTION
+    Play a yowl sound effect. This effect is very common in adult cats.
+
+.EXAMPLE
+    Get-CatYowl
+
+    This command play a yowl cat effect.
+
+#>
+[CmdletBinding]
 function Get-CatYowl {
-    PlayCatSound "$PSScriptRoot\cat-yowl.wav"
+    PlayCatSound "$PSSCriptRoot/cat-yowl.wav"
 }
 
 function ConvertUnicodeToString {
-    [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [string] $UnicodeChars
+        [string] $unicodeChars
     )
 
-    $UnicodeChars = $UnicodeChars -replace 'U\+', '';
+    $unicodeChars = $unicodeChars -replace 'U\+', '';
 
-    $UnicodeArray = @();
-    foreach ($UnicodeChar in $UnicodeChars.Split(' ')) {
-        $Int = [System.Convert]::ToInt32($UnicodeChar, 16);
-        $UnicodeArray += [System.Char]::ConvertFromUtf32($Int);
+    $unicodeArray = @();
+    foreach ($unicodeChar in $unicodeChars.Split(' ')) {
+        $intRepresentation = [System.Convert]::ToInt32($unicodeChar, 16);
+        $unicodeArray += [System.Char]::ConvertFromUtf32($intRepresentation);
     }
 
-    $UnicodeArray -join [String]::Empty;
+    $unicodeArray -join [String]::Empty;
 }
 
 function LoadCatNames {
-    Get-Content -Raw -Path "$PSScriptRoot\cat-names.json" | ConvertFrom-Json
+    Get-Content -Raw -Path "$PSSCriptRoot/cat-names.json" | ConvertFrom-Json
 }
 
 function PlayCatSound ($file) {
-    $player = New-Object System.Media.SoundPlayer
-    $player.SoundLocation = Get-Item $file
-    $player.Play()
+    if ($IsWindows -eq $true) {
+        $player = New-Object System.Media.SoundPlayer
+        $player.SoundLocation = Get-Item $file
+        $player.Play()
+    }
+    else {
+        open $file
+    }
+}
+
+function OpenPage ($url) {
+    if ($IsWindows -eq $true) {
+        Start-Process -FilePath $url
+    }
+    else {
+        open "$url"
+    }
+
 }
 
 Export-ModuleMember -Function *-*

@@ -12,7 +12,7 @@
 RootModule = 'posh-cats.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.3'
+ModuleVersion = '0.0.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -26,13 +26,13 @@ Author = 'kidchenko'
 
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+CompanyName = 'http://kidchenko.com'
 
 # Copyright statement for this module
-Copyright = 'MIT (c) kidchenko.'
+Copyright = 'MIT © [Jose Barbosa](http://kidchenko.com/)'
 
 # Description of the functionality provided by this module
-Description = 'Get popular cat names'
+Description = 'A cross-platform cats module for powershell.'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -71,7 +71,19 @@ Description = 'Get popular cat names'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('Get-CatName', 'Get-CatEmoji')
+FunctionsToExport = @(
+    'Get-CatName'
+    'Get-CatEmoji'
+    'Get-CatBuzz'
+    'Get-CatImage'
+    'Get-CatMeowMix'
+    'Get-CatMeow'
+    'Get-CatBabyMeow'
+    'Get-CatFight'
+    'Get-CatAngry'
+    'Get-CatPurr'
+    'Get-CatYowl'
+)
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'
@@ -97,7 +109,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @("cats", "cat-names", "name-of-cats", "business")
+        Tags = @("posh-cats", "cats", "cat-names", "posh", "business")
 
         # A URL to the license for this module.
         # LicenseUri = ''
@@ -106,7 +118,7 @@ PrivateData = @{
         ProjectUri = 'https://github.com/kidchenko/posh-cats'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        IconUri = 'https://github.com/kidchenko/posh-cats/raw/master/posh-cats.jpg'
 
         # ReleaseNotes of this module
         # ReleaseNotes = ''

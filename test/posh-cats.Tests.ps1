@@ -1,5 +1,5 @@
 $ModuleManifestName = 'posh-cats.psd1'
-$ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
+$ModuleManifestPath = "$PSSCriptRoot/..\$ModuleManifestName"
 
 Describe 'Module Manifest Tests' {
     It 'Passes Test-ModuleManifest' {
@@ -15,7 +15,7 @@ Describe 'Juca' {
     }
 
     It 'Get-CatName should return a name' {
-        # $allNames = Get-Content -Raw -Path "$PSScriptRoot\..\cat-names.json" | ConvertFrom-Json
+        # $allNames = Get-Content -Raw -Path "$PSSCriptRoot/..\cat-names.json" | ConvertFrom-Json
 
         # $name = Get-CatName
 
