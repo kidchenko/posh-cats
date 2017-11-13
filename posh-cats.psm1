@@ -13,21 +13,14 @@
 .DESCRIPTION
     This function allows you to get a single or a list of name of cats.
 
-.PARAMETER Filter
-    Filter the cat name, accept wildcards e.g *a | *a* | *a
+
 
 .PARAMETER All
     Show all cat names.
-
 .EXAMPLE
     Get-CatName
 
     This command get a single cat name. e.g Gracie
-
-.EXAMPLE
-    Get-CatName -Filter a*
-
-    This command get a single cat name filtering the names that start with a. e.g Angel
 
 .EXAMPLE
     Get-CatName -All
@@ -38,7 +31,6 @@
 [CmdletBinding]
 function Get-CatName {
     Param(
-        [string]$Filter = "*",
         [switch]$All
     )
 
@@ -47,8 +39,7 @@ function Get-CatName {
     if ($All -eq $true) {
         return $allCats
     }
-
-    $allCats | Where-Object { $_ -like $Filter } | Get-Random
+    return $allCats | Get-Random
 }
 
 <#
