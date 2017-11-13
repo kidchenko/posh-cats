@@ -1,3 +1,7 @@
 version: 0.0.{build}
-build:
-  verbosity: minimal
+image: WMF 5
+install:
+- ps: choco install pester
+build: off
+test_script:
+- ps: Invoke-Pester -EnableExit
