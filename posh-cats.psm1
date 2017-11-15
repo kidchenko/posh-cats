@@ -13,10 +13,9 @@
 .DESCRIPTION
     This function allows you to get a single or a list of name of cats.
 
-
-
 .PARAMETER All
     Show all cat names.
+
 .EXAMPLE
     Get-CatName
 
@@ -286,4 +285,6 @@ function OpenPage ($url) {
 
 }
 
+# Before PowerShell Core, the variable $IsWindows do not exist
+$IsWindows = $IsWindows -or $PSVersionTable.PSEdition -eq "Desktop"
 Export-ModuleMember -Function *-*
