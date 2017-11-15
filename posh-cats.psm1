@@ -30,6 +30,8 @@
 [CmdletBinding]
 function Get-CatName {
     Param(
+        [Parameter(ValueFromPipeline=$true,
+                   ValueFromPipelineByPropertyName=$true)]
         [switch]$All
     )
 
@@ -246,7 +248,7 @@ function Get-CatYowl {
 function ConvertUnicodeToString {
     param (
         [Parameter(Mandatory = $true)]
-        [string] $unicodeChars
+        [string]$unicodeChars
     )
 
     $unicodeChars = $unicodeChars -replace 'U\+', '';
