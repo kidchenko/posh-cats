@@ -1,10 +1,3 @@
-# Implement your module commands in this script.
-
-
-# Export only the functions using PowerShell standard verb-noun naming.
-# Be sure to list each exported functions in the FunctionsToExport field of the module manifest file.
-# This improves performance of command discovery in PowerShell.
-
 <#
 
 .SYNOPSIS
@@ -37,10 +30,11 @@ function Get-CatName {
 
     $allCats = LoadCatNames
 
-    if ($All -eq $true) {
+    if ($All -eq $true)
+    {
         return $allCats
     }
-    return $allCats | Get-Random
+    $allCats | Get-Random
 }
 
 <#
@@ -55,6 +49,7 @@ function Get-CatName {
     Get-CatEmoji
 
     This command return a cat emoji face. 🐱
+
 #>
 [CmdletBinding]
 function Get-CatEmoji {
@@ -102,7 +97,8 @@ function Get-CatImage {
     {
         "https://thecatapi.com/api/images/get?api_key=MjQyMzQ3"
     }
-    else {
+    else
+    {
         "http://thecatapi.com/api/images/get"
     }
 
@@ -210,10 +206,10 @@ function Get-CatAngry {
 <#
 
 .SYNOPSIS
-    Play a purr (that sound when the cat want love) sound effect.
+    Play a purr sound effect.
 
 .DESCRIPTION
-    Play a purr... purr... purr sound effect.
+    Play a purr... purr... purr sound effect (purr is the sound when the cat want some affection).
 
 .EXAMPLE
     Get-CatPurr
@@ -267,26 +263,33 @@ function LoadCatNames {
 }
 
 function PlayCatSound ($file) {
-    if ($IsWindows -eq $true) {
+    if ($IsWindows -eq $true)
+    {
         $player = New-Object System.Media.SoundPlayer
         $player.SoundLocation = Get-Item $file
         $player.Play()
     }
-    else {
-        open $file
+    else
+    {
+        open $file --hide
     }
 }
 
 function OpenPage ($url) {
-    if ($IsWindows -eq $true) {
+    if ($IsWindows -eq $true)
+    {
         Start-Process -FilePath $url
     }
-    else {
-        open "$url"
+    else
+    {
+        open "$url" --args "$url"
     }
-
 }
 
 # Before PowerShell Core, the variable $IsWindows do not exist
 $IsWindows = $IsWindows -or $PSVersionTable.PSEdition -eq "Desktop"
+
+# Export only the functions using PowerShell standard verb-noun naming.
+# Be sure to list each exported functions in the FunctionsToExport field of the module manifest file.
+# This improves performance of command discovery in PowerShell.
 Export-ModuleMember -Function *-*
