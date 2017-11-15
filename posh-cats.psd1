@@ -12,7 +12,7 @@
 RootModule = 'posh-cats.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.4'
+ModuleVersion = '0.0.5'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -109,7 +109,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @("posh-cats", "cats", "cat-names", "posh", "business")
+        Tags = @("posh-cats", "cats", "cat", "cat-names", "posh", "business")
 
         # A URL to the license for this module.
         # LicenseUri = ''
