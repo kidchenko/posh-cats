@@ -1,5 +1,6 @@
 $ModuleManifestName = 'posh-cats.psd1'
-$ModuleManifestPath = "$PSSCriptRoot/..\$ModuleManifestName"
+$ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
+. "$PSScriptRoot\..\posh-cats.psm1"
 
 Describe 'Module Manifest Tests' {
     It 'Passes Test-ModuleManifest' {
@@ -21,5 +22,49 @@ Describe 'Juca' {
 
         # $allNames | Should BeLike "*$name*"
     }
+
+}
+
+Describe "Get-CatName" {
+
+}
+
+Describe "Get-CatEmoji" {
+
+}
+
+Describe "Get-CatBuzz" {
+
+}
+
+Describe "Get-CatImage" {
+
+}
+
+Describe "Get-CatMeowYoutubeMix" {
+
+}
+
+Describe "Get-CatMeow" {
+
+}
+
+Describe "Get-CatBabyMeow" {
+
+}
+
+Describe "Get-CatFight" {
+
+}
+
+Describe "Get-CatAngry" {
+
+}
+
+Describe "Get-CatPurr" {
+
+}
+
+Describe "Get-CatYowl" {
 
 }
