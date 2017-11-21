@@ -271,7 +271,7 @@ function PlayCatSound ($file) {
     }
     else
     {
-        open $file --hide
+        open $file --hide --background
     }
 }
 

@@ -1,70 +1,76 @@
 $ModuleManifestName = 'posh-cats.psd1'
 $ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
-. "$PSScriptRoot\..\posh-cats.psm1"
 
-Describe 'Module Manifest Tests' {
-    It 'Passes Test-ModuleManifest' {
-        Test-ModuleManifest -Path $ModuleManifestPath | Should Not BeNullOrEmpty
+Describe 'Module Manifest' {
+    It 'Should be a valid ModuleManifest' {
+        Test-ModuleManifest -Path $ModuleManifestPath | Should -Not -BeNullOrEmpty
         $? | Should Be $true
     }
 }
 
-Describe 'Juca' {
-    It 'Juca' {
-        #$catNames = LoadCatNames
-        #$catNames.Count | Should Be (100)
+InModuleScope posh-cats {
+
+
+    Describe "Get-CatName" {
+
+        Context "When call: Get-CatName" {
+            Mock LoadCatNames { return "Juca" }
+            $result = Get-CatName
+
+            It "Should return a single name" {
+                $result | Should -Be "Juca"
+            }
+        }
+
+        Context "When call: Get-CatName -All" {
+            $result = Get-CatName -All
+
+            It "Should return 100 names" {
+                $result.Count | Should -Be 100
+                $result[0] | Should -Be "Abby"
+                $result[99] | Should -Be "Zoey"
+            }
+        }
     }
 
-    It 'Get-CatName should return a name' {
-        # $allNames = Get-Content -Raw -Path "$PSSCriptRoot/..\cat-names.json" | ConvertFrom-Json
 
-        # $name = Get-CatName
+    Describe "Get-CatEmoji" {
 
-        # $allNames | Should BeLike "*$name*"
     }
 
-}
+    Describe "Get-CatBuzz" {
 
-Describe "Get-CatName" {
+    }
 
-}
+    Describe "Get-CatImage" {
 
-Describe "Get-CatEmoji" {
+    }
 
-}
+    Describe "Get-CatMeowYoutubeMix" {
 
-Describe "Get-CatBuzz" {
+    }
 
-}
+    Describe "Get-CatMeow" {
 
-Describe "Get-CatImage" {
+    }
 
-}
+    Describe "Get-CatBabyMeow" {
 
-Describe "Get-CatMeowYoutubeMix" {
+    }
 
-}
+    Describe "Get-CatFight" {
 
-Describe "Get-CatMeow" {
+    }
 
-}
+    Describe "Get-CatAngry" {
 
-Describe "Get-CatBabyMeow" {
+    }
 
-}
+    Describe "Get-CatPurr" {
 
-Describe "Get-CatFight" {
+    }
 
-}
+    Describe "Get-CatYowl" {
 
-Describe "Get-CatAngry" {
-
-}
-
-Describe "Get-CatPurr" {
-
-}
-
-Describe "Get-CatYowl" {
-
+    }
 }
