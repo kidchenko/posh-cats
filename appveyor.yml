@@ -2,8 +2,6 @@ version: 0.0.{build}
 image: WMF 5
 install:
 - ps: choco install pester --pre
-- ps: $env:PSModulePath = "$env:PSModulePath;C:\projects\posh-cats"
-- ps: $env:PSModulePath = [System.Environment]::GetEnvironmentVariable("PSModulePath","Machine")
 build: off
 test_script:
 - ps: Import-Module "C:\projects\posh-cats\posh-cats.psm1"
