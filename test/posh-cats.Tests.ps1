@@ -10,7 +10,6 @@ Describe 'Module Manifest' {
 
 InModuleScope posh-cats {
 
-
     Describe "Get-CatName" {
 
         Context "When call: Get-CatName" {
