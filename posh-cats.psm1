@@ -53,7 +53,7 @@ function Get-CatName {
 #>
 [CmdletBinding]
 function Get-CatEmoji {
-    ConvertUnicodeToString -UnicodeChars "U+1F431"
+    ConvertUnicodeToString "U+1F431"
 }
 
 

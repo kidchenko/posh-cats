@@ -1,5 +1,6 @@
+$ModuleRoot = "$PSScriptRoot\.."
 $ModuleManifestName = 'posh-cats.psd1'
-$ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
+$ModuleManifestPath = "$ModuleRoot\$ModuleManifestName"
 
 Describe 'Module Manifest' {
     It 'Should be a valid ModuleManifest' {
@@ -11,7 +12,6 @@ Describe 'Module Manifest' {
 InModuleScope posh-cats {
 
     Describe "Get-CatName" {
-
         Context "When call: Get-CatName" {
             Mock LoadCatNames { return "Juca" }
             $result = Get-CatName
@@ -34,42 +34,150 @@ InModuleScope posh-cats {
 
 
     Describe "Get-CatEmoji" {
+        Context "When call: Get-CatEmoji" {
+            $result = Get-CatEmoji
+            Mock ConvertUnicodeToString {} -Verifiable -ParameterFilter {
+                $unicodeChars -eq "U+1F431"
+            }
 
+            It "Should return the cat emoji 🐱" {
+                $result | Should -Be "🐱"
+            }
+
+            It "Should convert U+1F431 to Unicode" {
+                $result = Get-CatEmoji
+                Assert-VerifiableMock
+            }
+        }
     }
 
     Describe "Get-CatBuzz" {
+        Context "When call: Get-CatBuzz" {
+            Mock OpenPage {} -Verifiable -ParameterFilter {
+                "https://www.buzzfeed.com/expresident/best-cat-pictures"
+            }
 
+            It "Should open 'Best Cat Pictures' on Buzzfeed" {
+                Get-CatBuzz
+                Assert-VerifiableMock
+            }
+        }
     }
 
     Describe "Get-CatImage" {
+        Context "When call: Get-CatImage on Windows" {
+            $IsWindows = $true
+            Mock OpenPage {} -Verifiable -ParameterFilter {
+                "https://thecatapi.com/api/images/get?api_key=MjQyMzQ3"
+            }
 
+            It "Should call Cat API using API key" {
+                Get-CatImage
+                Assert-VerifiableMock
+            }
+        }
+
+        Context "When call: Get-CatImage on Unix" {
+            $IsWindows = $false
+            Mock OpenPage {} -Verifiable -ParameterFilter {
+                "http://thecatapi.com/api/images/get"
+            }
+
+            It "Should call Cat API WITHOUT API key" {
+                Get-CatImage
+                Assert-VerifiableMock
+            }
+        }
     }
 
-    Describe "Get-CatMeowYoutubeMix" {
+    Describe "Get-CatMeowMix" {
+        Context "When call: CatMeowMix" {
+            Mock OpenPage {} -Verifiable -ParameterFilter {
+                "https://youtu.be/SbyZDq76T74"
+            }
 
+            It "Should open 'Cat Meow Mix' on Youtube" {
+                Get-CatMeowMix
+                Assert-VerifiableMock
+            }
+        }
     }
 
     Describe "Get-CatMeow" {
+        Context "When call: Get-CatMeow" {
+            Mock PlayCatSound {} -Verifiable -ParameterFilter {
+                "$ModuleRoot/cat-meow.wav"
+            }
 
+            It "Should play meow sound" {
+                Get-CatMeow
+                Assert-VerifiableMock
+            }
+        }
     }
 
     Describe "Get-CatBabyMeow" {
+        Context "When call: Get-CatBabyMeow" {
+            Mock PlayCatSound {} -Verifiable -ParameterFilter {
+                "$ModuleRoot/cat-baby-meow.wav"
+            }
 
+            It "Should play baby meow sound" {
+                Get-CatBabyMeow
+                Assert-VerifiableMock
+            }
+        }
     }
 
     Describe "Get-CatFight" {
+        Context "When call: Get-CatFight" {
+            Mock PlayCatSound {} -Verifiable -ParameterFilter {
+                "$ModuleRoot/cat-fight.wav"
+            }
 
+            It "Should play cat fight sound" {
+                Get-CatFight
+                Assert-VerifiableMock
+            }
+        }
     }
 
     Describe "Get-CatAngry" {
+        Context "When call: Get-CatAngry" {
+            Mock PlayCatSound {} -Verifiable -ParameterFilter {
+                "$ModuleRoot/cat-angry.wav"
+            }
 
+            It "Should play cat angry sound" {
+                Get-CatAngry
+                Assert-VerifiableMock
+            }
+        }
     }
 
     Describe "Get-CatPurr" {
+        Context "When call: Get-CatPurr" {
+            Mock PlayCatSound {} -Verifiable -ParameterFilter {
+                "$ModuleRoot/cat-angry.wav"
+            }
 
+            It "Should play cat purr sound" {
+                Get-CatPurr
+                Assert-VerifiableMock
+            }
+        }
     }
 
     Describe "Get-CatYowl" {
+        Context "When call: Get-CatYowl" {
+            Mock PlayCatSound {} -Verifiable -ParameterFilter {
+                "$ModuleRoot/cat-yowl.wav"
+            }
 
+            It "Should play cat yowl sound" {
+                Get-CatYowl
+                Assert-VerifiableMock
+            }
+        }
     }
 }
