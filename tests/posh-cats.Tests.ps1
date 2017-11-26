@@ -34,19 +34,24 @@ InModuleScope posh-cats {
 
 
     Describe "Get-CatEmoji" {
+
         Context "When call: Get-CatEmoji" {
+            Mock ConvertUnicodeToString { "🐱" }
             $result = Get-CatEmoji
-            Mock ConvertUnicodeToString {} -Verifiable -ParameterFilter {
-                $unicodeChars -eq "U+1F431"
-            }
 
             It "Should return the cat emoji 🐱" {
                 $result | Should -Be "🐱"
             }
+        }
+
+        Context "When call: Get-CatEmoji" {
+            Mock ConvertUnicodeToString {} -Verifiable -ParameterFilter {
+                $unicodeChars -eq "U+1F431"
+            }
+            $result = Get-CatEmoji
 
             It "Should convert U+1F431 to Unicode" {
-                $result = Get-CatEmoji
-                Assert-VerifiableMock
+                Assert-MockCalled ConvertUnicodeToString
             }
         }
     }
@@ -59,7 +64,7 @@ InModuleScope posh-cats {
 
             It "Should open 'Best Cat Pictures' on Buzzfeed" {
                 Get-CatBuzz
-                Assert-VerifiableMock
+                Assert-MockCalled OpenPage
             }
         }
     }
@@ -73,7 +78,7 @@ InModuleScope posh-cats {
 
             It "Should call Cat API using API key" {
                 Get-CatImage
-                Assert-VerifiableMock
+                Assert-MockCalled OpenPage
             }
         }
 
@@ -85,7 +90,7 @@ InModuleScope posh-cats {
 
             It "Should call Cat API WITHOUT API key" {
                 Get-CatImage
-                Assert-VerifiableMock
+                Assert-MockCalled OpenPage
             }
         }
     }
@@ -98,7 +103,7 @@ InModuleScope posh-cats {
 
             It "Should open 'Cat Meow Mix' on Youtube" {
                 Get-CatMeowMix
-                Assert-VerifiableMock
+                Assert-MockCalled OpenPage
             }
         }
     }
@@ -111,7 +116,7 @@ InModuleScope posh-cats {
 
             It "Should play meow sound" {
                 Get-CatMeow
-                Assert-VerifiableMock
+                Assert-MockCalled PlayCatSound
             }
         }
     }
@@ -124,7 +129,7 @@ InModuleScope posh-cats {
 
             It "Should play baby meow sound" {
                 Get-CatBabyMeow
-                Assert-VerifiableMock
+                Assert-MockCalled PlayCatSound
             }
         }
     }
@@ -137,7 +142,7 @@ InModuleScope posh-cats {
 
             It "Should play cat fight sound" {
                 Get-CatFight
-                Assert-VerifiableMock
+                Assert-MockCalled PlayCatSound
             }
         }
     }
@@ -150,7 +155,7 @@ InModuleScope posh-cats {
 
             It "Should play cat angry sound" {
                 Get-CatAngry
-                Assert-VerifiableMock
+                Assert-MockCalled PlayCatSound
             }
         }
     }
@@ -163,7 +168,7 @@ InModuleScope posh-cats {
 
             It "Should play cat purr sound" {
                 Get-CatPurr
-                Assert-VerifiableMock
+                Assert-MockCalled PlayCatSound
             }
         }
     }
@@ -176,7 +181,7 @@ InModuleScope posh-cats {
 
             It "Should play cat yowl sound" {
                 Get-CatYowl
-                Assert-VerifiableMock
+                Assert-MockCalled PlayCatSound
             }
         }
     }
